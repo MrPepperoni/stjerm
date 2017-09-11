@@ -445,6 +445,7 @@ void mainwindow_toggle(int sig)
     gtk_window_stick(GTK_WINDOW(mainwindow));
     gtk_window_set_keep_above(GTK_WINDOW(mainwindow), TRUE);
     gdk_window_focus(mainwindow->window, gtk_get_current_event_time());
+    mainwindow_reset_position();
     gdk_flush();
     gdk_threads_leave();
 }
@@ -468,8 +469,8 @@ static void mainwindow_reset_position(void)
     int x, y;
 
     conf_get_position(&x, &y);
-    gtk_window_move(GTK_WINDOW(mainwindow), x, y);
     gtk_window_resize(GTK_WINDOW(mainwindow), conf_get_width(), conf_get_height());
+    gtk_window_move(GTK_WINDOW(mainwindow), x, y);
 }
 
 static void mainwindow_show(GtkWidget *widget, gpointer userdata)
